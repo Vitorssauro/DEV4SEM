@@ -15,13 +15,10 @@ class ProdutosMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
+    { 
         if (Auth::check() && Auth::user()->tipo_usuario === 'administrador') {
-            return $next($request)
+            return $next($request);
         }
-        // Se não for uma empresa, redireciona com uma mensagem de erro
-        return redirect()->route('')->
-        withErrors('acess' => 'Você')
-        
+       return redirect()->route('home')->withErrors(['acess'=> 'Você não tem permissão para acessar essa área']);
     }
 }

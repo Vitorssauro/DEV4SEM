@@ -1,36 +1,38 @@
 <?php
 
-use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Middleware\ProdutosMiddleware;
+use App\Models\Carrinho;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/', function () {
-    return view('home');
-});
+//página inicial com carrossel de produtos
+Route::get ('/',[HomeController::class,'index'])->name('home');
 
-Route::get('/registro', [UserController::class, 'showRegistroForm'])->
-name('usuarios.registro');
+Route::get('/registro',[UserController::class,'showRegistroForm'])->name('usuarios.registro');
 
-Route::post('/registro', [UserController::class, 'registro'])->
-name('usuarios.controller');
+//Rota para processar o registro
+Route::post('/registro',[UserController::class, 'registro'])->name('usuarios.controller');
 
-//login
-Route::get('/login', [UserController::class, 'showLoginForm'])->
-name('usuarios.login');
+Route::get('/login',[UserController::class,'showLoginForm'])->name('usuarios.login');
 
-Route::post('/login', [UserController::class, 'login'])->
-name('usuarios.controller');
+//Rota para processar o login
+Route::post('/login',[UserController::class, 'login'])->name('usuarios.controller');
 
-// Rota para a pagina interna
-Route::get('/dashboard',function(){
-    return view('usuarios.dashboard');
-})->middleware('auth')->name('usarios.dashboard');
+//Rota para a página interna
+Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth')->name('dashboard');
 
-//Rota do Logout
-Route::post('/logout', [UserController::class,'logout'])->
-name('usuarios.logout');;
+//Rota do logout
+Route::post('/logout', [UserController::class, 'logout']);
 
-// Rota para produtos
-Route::resource('produtos', ProdutoController::class);
+Route::resource('produtos', ProdutoController::class)->middleware(ProdutosMiddleware::class)->except('show');
 
-Route::resource('produtos')
+// visualização de um produto específico
+Route::get('produtos/{produto}', [ProdutoController::class, 'show'])->middleware('auth')->name('produtos.show');
+
+//rota para adicionar um produto no carrinho
+Route::post('carrinho/add/{produto}', [CarrinhoController::class, 'add'])->middleware('auth')->name('carrinho.add');

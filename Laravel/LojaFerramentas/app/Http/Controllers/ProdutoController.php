@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::all();
-        return view('produtos.index', compact('produtos'));
+        return view('produtos.index',compact('produtos'));
     }
 
     /**
@@ -31,63 +30,61 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'required',
-            'categoria' => 'required',
-            'quantidade' => 'required|numeric',
-            'preco' => 'required|numeric',
-        ]);
+            'nome'=>'required|string|max:255',
+            'descricao'=>'required',
+            'categoria'=> 'required',
+            'preco'=> 'required|numeric',
+            'quantidade'=> 'required|numeric',
+          
 
-        Produto::create($request->all());
-
+        ]);                 
+        Produto::create($request->all());              
         return redirect()->route('produtos.index')
-            ->with('success', 'produto criado com sucesso.');
-    }
+        ->with('success', 'Produto criado com sucesso.');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Produto $produtos)
-    {
-        return view('produtos.show', compact('produtos'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Produto $produtos)
+    public function edit(Produto $produto)
     {
-        return view('produtos.edit', compact('produtos'));
-    }
+        return view('produtos.edit',compact('produto')); 
+    } 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produto $produtos)
+    public function update(Request $request, Produto $produto)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'required',
-            'categoria' => 'required',
-            'quantidade' => 'required|numeric',
-            'preco' => 'required|numeric',
+            'nome'=>'required|string|max:255',
+            'descricao'=>'required',
+            'categoria'=> 'required',
+            'preco'=> 'required|numeric',
+            'quantidade'=> 'required|numeric',
+           
+
+
         ]);
-
-        $produtos->update($request->all());
-
+        $produto->update($request->all());
         return redirect()->route('produtos.index')
-            ->with('success', 'produto atualizado com sucesso.');
+        ->with('success', 'Produto criado com sucesso.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produto $produtos)
+    public function destroy(Produto $produto)
     {
-        $produtos->delete();
-
+        $produto->delete();
 
         return redirect()->route('produtos.index')
-            ->with('success', 'produto Deletado com Sucesso.');
+                         ->with('success', 'Produto Deletado com Sucesso.');
+  
+    }
+
+    //mostrar os Produtoa
+    public function show(Produto $produto){
+        return view('produtos.show',compact('produto'));
     }
 }

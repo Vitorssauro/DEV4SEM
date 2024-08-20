@@ -9,6 +9,9 @@ class Carrinho extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'id_produto','id_user','quantidade','status'
+        'id_produto',
+        'id_user',
+        'quantidade',
+        'status'
     ];
 }

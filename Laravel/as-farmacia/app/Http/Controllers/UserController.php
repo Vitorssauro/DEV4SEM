@@ -1,64 +1,88 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+
+
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Exibir o formulário de login
+    public function showLoginForm()
     {
-        //
+        return view('usuarios.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    // Processar o login do usuário
+    public function login(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+        }
+
+
+        return back()->withErrors([
+            'email' => 'As credenciais não correspondem aos nossos registros.',
+        ])->onlyInput('email');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    // Exibir o formulário de registro
+    public function showRegistroForm()
     {
-        //
+        return view('usuarios.registro');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    // Processar o registro de um novo usuário
+    public function registro(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+
+        // Auth::login($user);
+
+
+        return redirect('/');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Realizar o logout do usuário
+    public function logout(Request $request)
     {
-        //
-    }
+        Auth::logout();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        
+        $request->session()->regenerateToken();
+        $request->session()->invalidate();
+
+
+        return redirect('/');
     }
 }

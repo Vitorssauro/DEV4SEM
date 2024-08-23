@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.content {
+    flex: 1;
+}
+
+
+.carousel-item img {
+    max-width: 100%;   /* Faz a imagem se ajustar à largura do contêiner */
+    max-height: 200px; /* Define a altura máxima da imagem */
+    width: auto;       /* Mantém a largura proporcional */
+    height: auto;      /* Mantém a altura proporcional */
+    object-fit: contain; /* Faz com que a imagem se ajuste ao contêiner sem cortar */
+}

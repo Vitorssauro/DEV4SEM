@@ -1,0 +1,105 @@
+/* ListaLivros.css */
+
+/* Centraliza todo o conteúdo da página */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilo para o título */
+h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Estilo para o link de adicionar novo livro */
+a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #28a745; /* Cor verde para o botão Adicionar */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+/* Estilo para o link de adicionar novo livro ao passar o mouse */
+a:hover {
+    background-color: #218838; /* Verde escuro para hover */
+}
+
+/* Estilo para a tabela */
+table {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para os cabeçalhos da tabela */
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para os cabeçalhos */
+th {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Estilo para as linhas alternadas */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Estilo para as células da tabela ao passar o mouse */
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para o link de edição e o botão de deletar */
+button,
+a.edit-link {
+    text-decoration: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* Estilo para o botão de deletar */
+button {
+    background-color: #dc3545; /* Cor vermelha para o botão Deletar */
+}
+
+/* Estilo para o botão de deletar ao passar o mouse */
+button:hover {
+    background-color: #c82333; /* Vermelho escuro para hover */
+}
+
+/* Estilo para o link de edição */
+a.edit-link {
+    background-color: #007bff; /* Cor azul para o botão Editar */
+    margin-right: 10px;
+    display: inline-block;
+}
+
+/* Estilo para o link de edição ao passar o mouse */
+a.edit-link:hover {
+    background-color: #0056b3; /* Azul escuro para hover */
+}

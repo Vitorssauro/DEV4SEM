@@ -16,7 +16,7 @@ function ListaLivros() {
         axios.delete(`http://localhost:5000/livros/${id}`)
             .then(() => setLivros(livros.filter(livro => livro._id !== id)))
             .catch(error => console.error('Erro ao deletar o livro:', error));
-    };
+    };      
 
     return (
         <div>

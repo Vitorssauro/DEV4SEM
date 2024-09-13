@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
 
 
 // Hash a senha antes de salvar
-UserSchema.pre('save', async function (next) {
+UserSchema.pre('create', async function (next) {
     if (!this.isModified('password')) {
         return next();
     }
@@ -25,10 +25,15 @@ UserSchema.pre('save', async function (next) {
 });
 
 
+
+
 // Método para comparar senhas
 UserSchema.methods.comparePassword = function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
+
+
+
 
   const User = mongoose.models.User || mongoose.model('User', UserSchema);
  

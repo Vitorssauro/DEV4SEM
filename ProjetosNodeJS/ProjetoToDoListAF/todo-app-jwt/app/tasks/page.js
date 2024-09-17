@@ -7,8 +7,7 @@ import { useRouter } from 'next/navigation';
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState('');
-  const [editTaskId, setEditTaskId] = useState(null);
+  const [newTask, setNewTask] = useState('');  
   const [editTitle, setEditTitle] = useState('');
   const router = useRouter();
 

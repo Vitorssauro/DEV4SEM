@@ -1,0 +1,28 @@
+package br.com.example;
+
+public class ExemploConceitoBasico {
+    // atributos
+    int idade = 25;
+    double valor = 99.99;
+    char letra = 'J';
+    boolean teste = false;
+
+    public static void main(String[] args) {
+        int a = 30, b = 40;
+        double c = 3.5;
+        boolean resultado = (a > b) && (c < 5);
+
+        System.out.println("soma a+b " + (a + b));
+        System.out.println("comparação a>b " + (a > b)); // Falso
+        System.out.println("comparação logico " + resultado); // Falso
+    }
+
+    public void declaracaoDeUmMetodo(int a, int b) {
+        System.out.println(a + b);
+
+    }
+
+    public void metodoComReturn(int a, int b) {
+        int c = a + b;
+    }
+}

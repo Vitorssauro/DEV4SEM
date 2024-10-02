@@ -1,0 +1,23 @@
+{
+    "usuarios": [
+        {
+            "nome": "Maria",
+            "idade": 25,
+            "endereco": "Rua 1"
+        },
+        {
+            "nome": "João",
+            "idade": 30,
+            "endereco": "Rua 1"
+        },
+        {
+            "id": "04d6",
+            "nome": "Maria",
+            "idade": 25,
+            "endereco": "Rua 1"
+        }
+    ],
+    "produtos": [
+        
+    ]
+}

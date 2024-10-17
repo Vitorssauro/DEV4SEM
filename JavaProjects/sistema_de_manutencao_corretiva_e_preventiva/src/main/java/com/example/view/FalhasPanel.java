@@ -12,59 +12,58 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.example.controllers.MaquinaController;
-import com.example.models.Maquina;
+import com.example.controllers.FalhaController;
+import com.example.models.Falha;
 
-public class MaquinasPanel extends JPanel {
+public class FalhasPanel extends JPanel {
     // ATRIBUTOS
-    private MaquinaController maquinaController;
-    private JTable maquinasTable;
+    private FalhaController falhaController;
+    private JTable falhasTable;
     private DefaultTableModel tableModel;
     private JButton btnSalvarAlteracoes;
-    private JButton btnCadastrarMaquina;
+    private JButton btnCadastrarFalha;
 
     // Construtor
-    public MaquinasPanel() {
+    public FalhasPanel() {
         super(new BorderLayout());
-        maquinaController = new MaquinaController();
+        falhaController = new FalhaController();
 
         tableModel = new DefaultTableModel(new Object[] {
-                "ID", "Nome", "Fabricante", "Modelo", "Detalhes", "Localização", "Tempo Vida"
+                "ID", "ID Maquina", "Data", "Problema", "Prioridade", "Operador"
         }, 0);
-        maquinasTable = new JTable(tableModel);
+        falhasTable = new JTable(tableModel);
 
         // criar a tabela
-        List<Maquina> maquinas = maquinaController.readMaquinas();
-        for (Maquina maquina : maquinas) {
+        List<Falha> falhas = falhaController.readFalhas();
+        for (Falha falha : falhas) {
             tableModel.addRow(new Object[] {
-                    maquina.getId(),
-                    maquina.getNome(),
-                    maquina.getFabricante(),
-                    maquina.getModelo(),
-                    maquina.getDetalhes(),
-                    maquina.getLocalizacao(),
-                    maquina.getTempoVidaEstimado()
+                    falha.getId(),
+                    falha.getMaquinaID(),
+                    falha.getData(),
+                    falha.getProblema(),
+                    falha.getPrioridade(),
+                    falha.getOperador()
             });
         }
-        JScrollPane scrollPane = new JScrollPane(maquinasTable);
+        JScrollPane scrollPane = new JScrollPane(falhasTable);
         this.add(scrollPane, BorderLayout.CENTER);
 
         // adicionar os botões
         JPanel painelInferior = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnCadastrarMaquina = new JButton("Cadastrar");
+        btnCadastrarFalha = new JButton("Cadastrar");
         btnSalvarAlteracoes = new JButton("Salvar");
-        painelInferior.add(btnCadastrarMaquina);
+        painelInferior.add(btnCadastrarFalha);
         painelInferior.add(btnSalvarAlteracoes);
         this.add(painelInferior, BorderLayout.SOUTH);
 
         // Criar as ActionListener para Botões
-        btnCadastrarMaquina.addActionListener(new ActionListener() {
+        btnCadastrarFalha.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 // criar o método de Cadastrar
                 // pegar as informações em um formulário
-                // gravar o objeto de maquinas
+                // gravar o objeto de Falhas
                 // chamar p controller
             }
 

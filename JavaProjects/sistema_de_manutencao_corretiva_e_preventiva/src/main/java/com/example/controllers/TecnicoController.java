@@ -6,10 +6,10 @@ import java.util.List;
 import com.example.api.TecnicoAPI;
 import com.example.models.Tecnico;
 
-public class TecnicosController {
+public class TecnicoController {
     private List<Tecnico> tecnicos;
 
-    public TecnicosController() {
+    public TecnicoController() {
         tecnicos = new ArrayList<>();
     }
 
